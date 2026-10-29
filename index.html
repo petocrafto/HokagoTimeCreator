@@ -255,21 +255,6 @@ footer{background:var(--navy);color:#9fb3d1;padding:48px 0 34px;border-top:1px s
  </div>
 </section>
 
-<section class="preview" style="background:var(--bg)">
- <div class="wrap">
-  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="pvTitle">Meet the admins</h2><p class="lead" data-i18n="pvText"></p></div>
-  <div class="team" id="teamPreview"></div>
-  <a class="btn btn-d more rv" href="#team" data-i18n="viewTeam">View the full team</a>
- </div>
-</section>
-
-<section class="dark">
- <div class="wrap">
-  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="socTitle">Follow HTC</h2><p class="lead" data-i18n="socText"></p></div>
-  <div class="soc" id="socPreview"></div>
- </div>
-</section>
-
 <section class="final">
  <div class="wrap rv"><span class="bar"></span><h2 data-i18n="finalTitle">Be Part of HTC.</h2><p class="lead" data-i18n="finalText"></p><a class="btn btn-p" href="#contact" data-i18n="goContact">Contact &amp; Join HTC</a></div>
 </section>
@@ -466,9 +451,8 @@ function socCards(id){
 function build(){
  featureCards('#hlCards',[['fan','hl1'],['create','hl2'],['chat','hl3']]);
  featureCards('#focusCards',[['fan','f1'],['create','f2'],['chat','f3']]);
- teamCards('#teamPreview',[ADMINS[0],ADMINS[1],ADMINS[2],ADMINS[6]]);
  teamCards('#teamGrid',ADMINS);
- socCards('#socPreview');socCards('#socGrid');
+ socCards('#socGrid');
  $('#joinGrid').innerHTML=[['v1','Hokago Time Creator V1','join1'],['v2','Hokago Time Creator V2','join2']].map((g,i)=>`<article class="card rv" style="--d:${i*.1}s"><div class="ico wa">${ICON.whatsapp}</div><h3>${g[1]}</h3><p data-i18n="joinD"></p><a class="btn btn-p btn-sm" href="${LINKS[g[0]]}" ${ext}><span data-i18n="${g[2]}"></span></a></article>`).join('');
  $('#heroJoin').innerHTML='<small data-i18n="joinGroup"></small>'+[['v1','join1'],['v2','join2']].map(g=>`<a class="btn btn-wa" href="${LINKS[g[0]]}" ${ext}>${ICON.whatsapp.replace('class="f"','')}<span data-i18n="${g[1]}"></span></a>`).join('');
  $('#idLinks').innerHTML=SOC.map(s=>`<a class="btn btn-d btn-sm" href="${LINKS[s[0]]}" ${ext}>${s[1]}</a>`).join('');
