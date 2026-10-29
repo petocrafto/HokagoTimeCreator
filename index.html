@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTC – Hokago Time Creator/Community</title>
+<meta name="description" content="Welcome to the Hokago Time Creator/Community. A place for HTT fans to share memories, stories, have fun, and enjoy casual conversations together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#071426;--dark:#0B1F3A;--blue:#2563EB;--light:#93C5FD;--cyan:#22D3EE;--white:#fff;--bg:#F4F8FF;--muted:#94A3B8;--ink:#0B1F3A;--r:16px;--nav:76px;--shadow:0 10px 30px rgba(7,20,38,.12);--font:'Plus Jakarta Sans',Inter,system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav)}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px;overflow-x:hidden}
+body.lock{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1160px,92%);margin:0 auto}
+section{padding:96px 0;position:relative}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:14px}
+.lead{max-width:62ch;color:#475569;font-size:1.06rem}
+.dark .lead,.dark p{color:#c7d6ee}
+.dark{background:var(--navy);color:#fff}
+.sec-head{margin-bottom:44px}
+.bar{display:block;width:48px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--cyan),var(--blue));margin-bottom:18px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 24px;border-radius:999px;font-weight:700;font-size:.95rem;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-p{background:var(--blue);color:#fff;box-shadow:0 6px 20px rgba(37,99,235,.35)}
+.btn-p:hover{background:#1d4fd0;box-shadow:0 8px 26px rgba(34,211,238,.35)}
+.btn-o{border:1.5px solid rgba(147,197,253,.6);color:#fff}
+.btn-o:hover{background:rgba(147,197,253,.14);border-color:var(--cyan)}
+.btn-d{border:1.5px solid var(--blue);color:var(--blue)}
+.btn-d:hover{background:var(--blue);color:#fff}
+.btn-wa{background:#22c55e;color:#04210f;box-shadow:0 6px 20px rgba(34,197,94,.3)}
+.btn-wa:hover{background:#4ade80}
+.btn-wa svg{width:20px;height:20px;fill:currentColor}
+.hjoin{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.hjoin small{width:100%;color:#b9cbe6;font-size:.88rem;font-weight:600}
+.btn-sm{min-height:40px;padding:0 18px;font-size:.88rem}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:1000;background:rgba(7,20,38,.82);transition:background .3s,box-shadow .3s;animation:navIn .6s ease}
+nav.solid{background:rgba(7,20,38,.94);box-shadow:0 2px 20px rgba(0,0,0,.3)}
+nav .wrap{display:flex;align-items:center;height:100%;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff}
+.logo img{height:52px;width:auto}
+img[data-src]:not(.ok){visibility:hidden}
+.badge{background:#fff;border-radius:14px;padding:6px 12px}
+.logo b{font-size:1.4rem}
+.menu{display:flex;gap:6px;margin-left:auto;align-items:center}
+.menu a.lnk{white-space:nowrap;color:#dbe7fb;padding:8px 14px;border-radius:999px;font-weight:600;font-size:.92rem;position:relative;transition:color .2s}
+.menu a.lnk:hover{color:#fff}
+.menu a.lnk::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:var(--cyan);transform:scaleX(0);transition:transform .25s}
+.menu a.lnk.active{color:#fff}
+.menu a.lnk.active::after{transform:scaleX(1)}
+.lang{display:flex;border:1.5px solid rgba(147,197,253,.4);border-radius:999px;overflow:hidden}
+.lang button{padding:6px 12px;font-size:.82rem;font-weight:700;color:#c7d6ee;min-height:34px}
+.lang button[aria-pressed=true]{background:var(--cyan);color:var(--navy)}
+.burger{display:none;width:46px;height:46px;margin-left:auto;border-radius:12px;border:1.5px solid rgba(147,197,253,.5);color:#fff;place-items:center;flex:none}
+.burger svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.burger .ix{display:none}
+.burger[aria-expanded=true] .ix{display:block}
+.burger[aria-expanded=true] .ib{display:none}
+@keyframes navIn{from{opacity:0}to{opacity:1}}
+
+/* hero */
+#home{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:calc(var(--nav) + 40px) 0 80px;background:var(--navy);color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#12386b,var(--navy) 70%) center/cover;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% center}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,20,38,.94) 0%,rgba(7,20,38,.72) 55%,rgba(11,31,58,.5) 100%),linear-gradient(0deg,var(--navy),transparent 30%)}
+.orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 65%);z-index:1;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.orb.a{width:420px;height:420px;right:-80px;top:10%}
+.orb.b{width:300px;height:300px;left:-60px;bottom:5%;animation-delay:-6s}
+.dot{position:absolute;width:6px;height:6px;border:1.5px solid rgba(147,197,253,.5);border-radius:50%;z-index:1;animation:float 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-40px,30px)}}
+@keyframes float{to{transform:translateY(-26px)}}
+.hero-in{position:relative;z-index:2}
+.hero-logo{height:clamp(120px,26vw,220px);width:auto;max-width:86%;object-fit:contain;margin-bottom:26px}
+.hero-fb{display:none;font-weight:800;font-size:2.6rem;color:var(--cyan);margin-bottom:20px}
+#home h1{font-size:clamp(2.5rem,7vw,4.8rem);max-width:14ch;margin-bottom:20px}
+#home p.lead{color:#d3e1f7;margin-bottom:34px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.enter{opacity:0;transform:translateY(22px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* intro + cards */
+.intro{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.pill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill-list span{padding:8px 16px;border-radius:999px;border:1px solid rgba(147,197,253,.35);color:#c7d6ee;font-size:.9rem;font-weight:600}
+.intro .v2{width:min(100%,440px);margin:auto;filter:drop-shadow(0 20px 40px rgba(34,211,238,.18))}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border-radius:var(--r);padding:30px 26px;box-shadow:var(--shadow);border:1px solid #e3ecfb;transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);border-color:var(--light);box-shadow:0 16px 36px rgba(37,99,235,.16)}
+.card h3{font-size:1.2rem;margin:16px 0 8px}
+.card p{color:#52627a;font-size:.97rem}
+.ico{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--dark);color:var(--cyan)}
+.ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ico svg.f{fill:currentColor;stroke:none}
+.dark .card{background:var(--dark);border-color:rgba(147,197,253,.18);box-shadow:none}
+.dark .card p{color:#b9cbe6}
+.dark .card:hover{border-color:var(--cyan)}
+.dark .ico{background:rgba(34,211,238,.12)}
+.more{margin-top:30px}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.mem{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid #e3ecfb;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s}
+.mem:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 16px 36px rgba(37,99,235,.16)}
+.mem .av{aspect-ratio:1/1;background:linear-gradient(135deg,var(--dark),var(--blue));display:grid;place-items:center;color:#fff;font-weight:800;font-size:2.4rem;overflow:hidden}
+.mem .av img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.mem .bd{padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mem h3{font-size:1.05rem}
+.role{color:var(--blue);font-weight:700;font-size:.88rem}
+.mem p{color:#52627a;font-size:.9rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.mem .btn{margin-top:auto}
+.preview .team{grid-template-columns:repeat(4,1fr)}
+
+/* about */
+.about-top{background:linear-gradient(180deg,#fff,var(--bg))}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.panel{background:#fff;border-radius:var(--r);padding:34px;border:1px solid #e3ecfb;box-shadow:var(--shadow)}
+.panel.navy{background:var(--dark);color:#fff;border-color:transparent}
+.panel.navy p,.panel.navy li{color:#c7d6ee}
+.panel h3{font-size:1.35rem;margin-bottom:12px}
+.panel ul{list-style:none;display:grid;gap:12px}
+.panel li{padding-left:28px;position:relative;color:#475569}
+.panel li::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:12px;border-radius:50%;border:2px solid var(--cyan)}
+.quote{border-left:4px solid var(--cyan);padding:6px 0 6px 18px;margin:20px 0;font-weight:600;color:var(--dark);max-width:60ch}
+.sub{margin-top:56px}
+.sub>h3{font-size:1.5rem;margin-bottom:20px}
+
+/* contact */
+.soc{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.soc .card,.join .card{display:flex;flex-direction:column;align-items:flex-start}
+.soc .card .btn,.join .card .btn{margin-top:auto}
+.soc .card p,.join .card p{margin-bottom:20px}
+.join{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.wa{background:#052e22;color:#4ade80}
+.dark .wa{background:rgba(74,222,128,.12)}
+.note{border:1.5px dashed rgba(147,197,253,.4);border-radius:var(--r);padding:22px 26px;color:#c7d6ee}
+.final{text-align:center;background:linear-gradient(135deg,var(--dark),var(--navy));color:#fff}
+.final .lead{margin:0 auto 28px;color:#c7d6ee}
+.final .bar{margin:0 auto 18px}
+.sh{height:1px;background:rgba(147,197,253,.2);margin:0}
+
+/* footer */
+footer{background:var(--navy);color:#9fb3d1;padding:48px 0 34px;border-top:1px solid rgba(147,197,253,.15)}
+.ft{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;align-items:flex-start}
+.ft img{height:68px;width:auto;margin-bottom:12px}
+.ft h4{color:#fff;font-size:.95rem;margin-bottom:10px}
+.ft a{display:block;padding:3px 0;transition:color .2s}
+.ft a:hover{color:var(--cyan)}
+.copy{margin-top:30px;font-size:.85rem;border-top:1px solid rgba(147,197,253,.12);padding-top:20px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(7,20,38,.78);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.modal.open{opacity:1;visibility:visible}
+.dlg{background:#fff;border-radius:22px;width:min(820px,100%);max-height:92vh;overflow:auto;display:grid;grid-template-columns:320px 1fr;transform:translateY(20px) scale(.97);transition:transform .35s cubic-bezier(.2,.7,.2,1);position:relative}
+.modal.open .dlg{transform:none}
+.dlg .av{background:var(--dark);align-self:stretch;min-height:260px;display:grid;place-items:center;color:#fff;font-size:3.4rem;font-weight:800}
+.dlg .av img{width:100%;height:100%;object-fit:contain;object-position:center}
+.dlg .bd{padding:34px 30px;display:flex;flex-direction:column;gap:10px}
+.dlg h3{font-size:1.6rem}
+.dlg p{color:#475569}
+.dlg .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(7,20,38,.8);color:#fff;font-size:1.3rem;line-height:1;z-index:2}
+.x:hover{background:var(--blue)}
+
+@media(max-width:1020px){.team,.preview .team{grid-template-columns:repeat(2,1fr)}.grid3,.soc{grid-template-columns:1fr 1fr}}
+@media(max-width:1080px){
+ .burger{display:grid}
+ .menu{position:fixed;top:var(--nav);left:0;right:0;bottom:0;z-index:999;background:rgba(7,20,38,.98);flex-direction:column;align-items:stretch;justify-content:flex-start;padding:24px 6%;gap:6px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s;margin:0;overflow:auto}
+ .menu.open{opacity:1;visibility:visible;transform:none}
+ .menu a.lnk{font-size:1.1rem;padding:14px 8px;border-bottom:1px solid rgba(147,197,253,.12);border-radius:0}
+ .menu a.lnk::after{display:none}
+ .menu a.lnk.active{color:var(--cyan)}
+ .lang{align-self:flex-start;margin:14px 0}
+ .menu .btn{margin-top:6px}
+ nav.open{background:var(--navy)}
+}
+@media(max-width:860px){
+ .intro,.two,.join{grid-template-columns:1fr}
+ section{padding:72px 0}
+ .dlg{grid-template-columns:1fr}.dlg .av{min-height:0;padding-top:46px}.dlg .av img{height:auto;max-height:48vh}
+}
+@media(max-width:620px){.grid3,.soc{grid-template-columns:1fr}.team,.preview .team{gap:14px}.mem .bd{padding:14px}.cta .btn,.hjoin .btn{flex:1 1 100%}}
+@media(max-width:340px){.team,.preview .team{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.orb,.dot{display:none}.enter{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav id="nav">
+ <div class="wrap">
+  <a href="#home" class="logo" aria-label="HTC"><img class="nav-logo" data-src="https://kappa.lol/jR46xb" data-kind="logo" alt="HTC logo" data-i18n-alt="logoAlt"></a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu" data-i18n-aria="menuOpen"><svg class="ib" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ix" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="menu" id="menu">
+   <a class="lnk" href="#home" data-i18n="nHome">Home</a>
+   <a class="lnk" href="#about" data-i18n="nAbout">About HTC</a>
+   <a class="lnk" href="#team" data-i18n="nTeam">Our Admin Team</a>
+   <a class="lnk" href="#contact" data-i18n="nContact">Contact &amp; Join</a>
+   <div class="lang" role="group" aria-label="Language" data-i18n-aria="langLabel">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="id" aria-pressed="false">ID</button>
+   </div>
+   <a class="btn btn-p btn-sm" href="#contact" data-i18n="joinHTC">Join HTC</a>
+  </div>
+ </div>
+</nav>
+
+<main>
+<!-- HOME -->
+<section id="home" class="dark">
+ <div class="hero-bg"><img data-src="https://kappa.lol/aDkXUR" alt=""></div>
+ <div class="orb a"></div><div class="orb b"></div>
+ <i class="dot" style="left:12%;top:28%"></i><i class="dot" style="left:78%;top:68%;animation-delay:-3s"></i><i class="dot" style="left:48%;top:84%;animation-delay:-5s"></i>
+ <div class="wrap hero-in">
+  <img class="hero-logo enter" style="animation-delay:.25s" data-src="https://kappa.lol/jR46xb" data-kind="logo" alt="Hokago Time Creator/Community logo" data-i18n-alt="logoAlt">
+  <div class="hero-fb">HTC</div>
+  <h1 class="enter" style="animation-delay:.4s" data-i18n="heroTitle">Your After-School Community.</h1>
+  <p class="lead enter" style="animation-delay:.55s" data-i18n="heroDesc"></p>
+  <div class="cta enter" style="animation-delay:.7s">
+   <a class="btn btn-p" href="#about" data-i18n="explore">Explore HTC</a>
+   <a class="btn btn-o" href="#contact" data-i18n="joinUs">Join Our Community</a>
+  </div>
+  <div class="hjoin enter" id="heroJoin" style="animation-delay:.85s"></div>
+ </div>
+</section>
+
+<section class="dark" style="padding-top:0">
+ <div class="wrap">
+  <div class="intro">
+   <div class="rv">
+    <span class="bar"></span>
+    <h2 data-i18n="introTitle">A home for HTT fans</h2>
+    <p class="lead" data-i18n="introText"></p>
+    <div class="pill-list"><span data-i18n="p1">Memories &amp; stories</span><span data-i18n="p2">Casual conversations</span><span data-i18n="p3">HTT fandom</span><span data-i18n="p4">Community interaction</span><span data-i18n="p5">Creative activities</span></div>
+   </div>
+   <div class="rv" style="--d:.15s"><img class="v2" data-src="https://kappa.lol/I0GOF3" data-kind="logo" alt="HTC anime-style logo" data-i18n-alt="logoV2Alt"></div>
+  </div>
+  <div class="sub"><h3 class="rv" style="font-size:1.5rem;margin-bottom:20px" data-i18n="hlTitle">Community highlights</h3>
+   <div class="grid3" id="hlCards"></div>
+  </div>
+ </div>
+</section>
+
+<section class="preview" style="background:var(--bg)">
+ <div class="wrap">
+  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="pvTitle">Meet the admins</h2><p class="lead" data-i18n="pvText"></p></div>
+  <div class="team" id="teamPreview"></div>
+  <a class="btn btn-d more rv" href="#team" data-i18n="viewTeam">View the full team</a>
+ </div>
+</section>
+
+<section class="dark">
+ <div class="wrap">
+  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="socTitle">Follow HTC</h2><p class="lead" data-i18n="socText"></p></div>
+  <div class="soc" id="socPreview"></div>
+ </div>
+</section>
+
+<section class="final">
+ <div class="wrap rv"><span class="bar"></span><h2 data-i18n="finalTitle">Be Part of HTC.</h2><p class="lead" data-i18n="finalText"></p><a class="btn btn-p" href="#contact" data-i18n="goContact">Contact &amp; Join HTC</a></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-top">
+ <div class="wrap">
+  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="aboutTitle">About Hokago Time Community</h2><p class="lead" data-i18n="aboutIntro"></p></div>
+  <div class="two">
+   <div class="panel rv"><h3 data-i18n="storyTitle">Our story</h3>
+    <p data-i18n="storyText" style="color:#475569"></p>
+    <blockquote class="quote" data-i18n="quote"></blockquote>
+    <!-- EDITABLE PLACEHOLDER: Add confirmed HTC history (founding date, milestones) here once official information is provided. Do not publish unverified facts. -->
+   </div>
+   <div class="panel navy rv" style="--d:.1s"><h3 data-i18n="vmTitle">Vision &amp; mission</h3>
+    <!-- DRAFT CONTENT: vision and mission below are proposed text pending approval by HTC leadership. Edit translations.en/id keys "vision" and "mission1-4". -->
+    <p style="margin-bottom:16px" data-i18n="vision"></p>
+    <ul><li data-i18n="mission1"></li><li data-i18n="mission2"></li><li data-i18n="mission3"></li><li data-i18n="mission4"></li></ul>
+   </div>
+  </div>
+  <div class="sub"><h3 data-i18n="focusTitle">Our focus</h3><div class="grid3" id="focusCards"></div></div>
+  <div class="sub"><div class="panel rv"><h3 data-i18n="idTitle">Social media identity</h3><p style="color:#475569;margin-bottom:20px;max-width:64ch" data-i18n="idText"></p>
+   <div style="display:flex;flex-wrap:wrap;gap:12px" id="idLinks"></div></div></div>
+ </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="background:#fff">
+ <div class="wrap">
+  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="teamTitle">Our Admin Team</h2><p class="lead" data-i18n="teamText"></p></div>
+  <div class="team" id="teamGrid"></div>
+ </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="dark">
+ <div class="wrap">
+  <div class="sec-head rv"><span class="bar"></span><h2 data-i18n="cTitle">Connect With HTC</h2><p class="lead" data-i18n="cText"></p></div>
+  <h3 class="rv" style="margin-bottom:18px" data-i18n="offSocial">Official Social Media</h3>
+  <div class="soc" id="socGrid"></div>
+  <h3 class="rv sub" style="margin-bottom:18px" data-i18n="joinTitle">Join Our Community</h3>
+  <div class="join" id="joinGrid"></div>
+  <h3 class="rv sub" style="margin-bottom:18px" data-i18n="partTitle">Partnership inquiries</h3>
+  <!-- CONFIGURABLE: set PARTNER_CONTACT in the script to an official email/URL when available. Nothing is shown as a link until then. -->
+  <div class="note rv" id="partner"></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="ft">
+   <div><img data-src="https://kappa.lol/jR46xb" data-kind="logo" alt="HTC logo" data-i18n-alt="logoAlt"><p style="max-width:34ch" data-i18n="footDesc"></p></div>
+   <div><h4 data-i18n="footNav">Navigate</h4><a href="#home" data-i18n="nHome"></a><a href="#about" data-i18n="nAbout"></a><a href="#team" data-i18n="nTeam"></a><a href="#contact" data-i18n="nContact"></a></div>
+   <div><h4 data-i18n="followUs">Follow Us</h4><div id="footSoc"></div></div>
+  </div>
+  <p class="copy">© <span id="yr"></span> Hokago Time Creator/Community. <span data-i18n="rights">All rights reserved.</span></p>
+ </div>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+ <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="mName" tabindex="-1">
+  <button class="x" id="mClose" type="button" aria-label="Close" data-i18n-aria="close">×</button>
+  <div class="av" id="mAv"></div>
+  <div class="bd">
+   <h3 id="mName"></h3><div class="role" id="mRole"></div><p id="mDesc"></p>
+   <div class="acts"><a class="btn btn-p" id="mLink" target="_blank" rel="noopener noreferrer" data-i18n="visitAcc">Visit public account</a><button class="btn btn-d" id="mBack" type="button" data-i18n="back">Back to Team</button></div>
+  </div>
+ </div>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+/* ---------- DATA ---------- */
+const LINKS={
+ tiktok:'https://www.tiktok.com/@hokagotimecreator?_r=1&_t=ZS-9AuAC4CDJOK',
+ instagram:'https://www.instagram.com/hokagotimecreator?dlrf=cnJ6ZmgwemZrYmlp',
+ channel:'https://whatsapp.com/channel/0029VbDlhD7K0IBlhFKk2c2g',
+ v1:'https://chat.whatsapp.com/FlM7uD53twb7q85WElKFZh?s=cl&p=a&iam=2',
+ v2:'https://chat.whatsapp.com/CyvAjrp7wnKGSU93HGXOOq?s=cl&p=a&iam=2'
+};
+const PARTNER_CONTACT=''; /* Set to an official email or URL when available. */
+const ADMINS=[
+ {n:'Abian Akromi',r:'Founder',a:'https://kappa.lol/P67QyD',u:'https://www.instagram.com/yanjikuyo22?dlrf=ampqMzVreDBtZDdo',
+  d:{en:'The visionary behind HTC, responsible for its overall direction and key decisions. Ensures the community continues to operate in line with its goals.',id:'Sosok visioner di balik HTC yang bertanggung jawab atas arah dan keputusan penting komunitas. Memastikan komunitas terus berjalan sesuai tujuannya.'}},
+ {n:'Alfiansyah Ramadhan',r:'Community Manager',a:'https://kappa.lol/Z9A1Pt',u:'https://www.tiktok.com/@alfiansyahdt?_r=1&_t=ZS-9Aq5LSXunqe',
+  d:{en:'Coordinates the admin team, maintains community engagement, and helps turn the Owner’s vision into real activities.',id:'Mengoordinasikan tim admin, menjaga keterlibatan komunitas, dan membantu mewujudkan visi Owner menjadi kegiatan nyata.'}},
+ {n:'Cintya Apponno',r:'Event Organizer',a:'https://kappa.lol/3Cc8ny',u:'https://www.tiktok.com/@tamaalagiesbeh?_r=1&_t=ZS-9ArcFOyZoBk',
+  d:{en:'Essential for organizing events, tournaments, and activities that keep members engaged and drive community growth.',id:'Berperan penting dalam menyelenggarakan acara, turnamen, dan kegiatan yang menjaga keaktifan anggota serta mendorong pertumbuhan komunitas.'}},
+ {n:'Muhammad Rendy',r:'Media Producer',a:'https://kappa.lol/MWtZaW',u:'https://vm.tiktok.com/ZS9yNbJs2ayk5-ElYb7/',
+  d:{en:'Manages video content production and documentation to expand HTC’s reach and strengthen its identity.',id:'Mengelola produksi konten video dan dokumentasi untuk memperluas jangkauan HTC dan memperkuat identitasnya.'}},
+ {n:'Ajay Lesmana',r:'Media Producer',a:'https://kappa.lol/YepcBZ',u:'https://www.tiktok.com/@misaki_design?_r=1&_t=ZS-9Aq5y4oRUgS',
+  d:{en:'Manages video content production and documentation to expand HTC’s reach and strengthen its identity.',id:'Mengelola produksi konten video dan dokumentasi untuk memperluas jangkauan HTC dan memperkuat identitasnya.'}},
+ {n:'Veliane Aming',r:'Graphic Designer',a:'https://kappa.lol/LHqD6Q',u:'https://www.tiktok.com/@lyaaaismine',
+  d:{en:'Creates posters, logos, and visual materials to maintain HTC’s consistent and appealing visual identity.',id:'Membuat poster, logo, dan materi visual untuk menjaga identitas visual HTC tetap konsisten dan menarik.'}},
+ {n:'Adicandra Khenan',r:'Bot & Web Developer',a:'https://kappa.lol/suYie7',u:'https://www.tiktok.com/@nakamaprst?_r=1&_t=ZS-9Aq9ttTDWqq',
+  d:{en:'Developing, managing, and maintaining HTC\'s bots, automation systems, and website to support the community\'s digital infrastructure and improve its overall functionality.',id:'Mengembangkan, mengelola, dan memelihara bot, sistem otomasi, serta website HTC untuk mendukung infrastruktur digital komunitas dan meningkatkan fungsionalitasnya.'}}
+];
+const ICON={
+ fan:'<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.1 6L12 16.6 6.7 19.6l1.1-6L3.3 9.4l6.1-.8z"/></svg>',
+ create:'<svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>',
+ chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>',
+ tiktok:'<svg class="f" viewBox="0 0 24 24"><path d="M16.6 3c.3 2.3 1.7 3.8 4 4v3.2a7.3 7.3 0 01-4-1.2v6.2a5.6 5.6 0 11-5.6-5.6c.3 0 .6 0 .9.1v3.3a2.4 2.4 0 10 1.5 2.2V3z"/></svg>',
+ instagram:'<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor"/></svg>',
+ whatsapp:'<svg class="f" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8s-.4-.1-.5.100-.6.800-.8 1-.3.200-.5.100a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.600-1.200.1-.1 0-.3 0-.4l-.8-1.800c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 00-.7.300 3 3 0 00-.9 2.200 5.200 5.200 0 001.100 2.800 11.900 11.900 0 004.600 4c1.700.7 2.300.8 3.200.700a2.700 2.700 0 001.800-1.300 2.200 2.200 0 00.200-1.300c-.100-.100-.300-.200-.500-.300z"/></svg>'
+};
+/* ---------- TRANSLATIONS ---------- */
+const OFFICIAL_EN='Welcome to the Hokago Time Creator/Community. A place for HTT fans to share memories, stories, have fun, and enjoy casual conversations together.';
+const OFFICIAL_ID='Selamat datang di Hokago Time Creator/Community. Tempat bagi para penggemar HTT untuk berbagi kenangan, cerita, bersenang-senang, dan mengobrol santai bersama.';
+const translations={
+en:{
+ logoAlt:'Hokago Time Creator/Community logo',logoV2Alt:'HTC anime-style logo',menuOpen:'Open menu',menuClose:'Close menu',langLabel:'Language',
+ nHome:'Home',nAbout:'About HTC',nTeam:'Our Admin Team',nContact:'Contact & Join',joinHTC:'Join HTC',
+ joinGroup:'Join our WhatsApp group:',heroTitle:'Your After-School Community.',heroDesc:OFFICIAL_EN,explore:'Explore HTC',joinUs:'Join Our Community',
+ introTitle:'A home for HTT fans',introText:'HTC is where fans gather after the bell rings: to swap memories and stories, chat casually, and enjoy HTT together.',
+ p1:'Memories & stories',p2:'Casual conversations',p3:'HTT fandom',p4:'Community interaction',p5:'Creative activities',
+ hlTitle:'Community highlights',
+ hl1t:'Anime & HTT Fandom',hl1d:'Celebrate the series you love with fellow HTT fans.',
+ hl2t:'Content Creation',hl2d:'Share creative work and ideas with the community.',
+ hl3t:'Community & Conversations',hl3d:'Relaxed chats and friendly interaction, any time.',
+ pvTitle:'Meet the admins',pvText:'The people who keep HTC running.',viewTeam:'View the full team',viewProfile:'View Profile',
+ socTitle:'Follow HTC',socText:'Find HTC on TikTok, Instagram, and the official WhatsApp Channel.',
+ finalTitle:'Be Part of HTC.',finalText:'Connect with the community and become part of the Hokago Time experience.',goContact:'Contact & Join HTC',
+ aboutTitle:'About Hokago Time Community',aboutIntro:OFFICIAL_EN,
+ storyTitle:'Our story',storyText:'HTC is a community built around HTT fandom. Members share memories and stories, have fun, and enjoy casual conversations together, with community interaction at the center.',quote:OFFICIAL_EN,
+ vmTitle:'Vision & mission',
+ vision:'To build a welcoming, creative, and engaging community where members can share interests, experiences, and meaningful interactions.',
+ mission1:'Encourage friendly conversations and community interaction.',mission2:'Provide a space to share stories, interests, and creative work.',mission3:'Support engaging community activities.',mission4:'Encourage collaboration and positive participation.',
+ focusTitle:'Our focus',f1t:'Anime & HTT Fandom',f1d:'A shared space for fans to enjoy HTT and talk about what they love.',f2t:'Content Creation',f2d:'Room to make and share creative work together.',f3t:'Community & Collaboration',f3d:'Working together and supporting one another.',
+ idTitle:'Social media identity',idText:'HTC connects with its audience through TikTok, Instagram, and the official WhatsApp Channel.',
+ teamTitle:'Our Admin Team',teamText:'Meet the seven administrators who guide and look after HTC.',
+ cTitle:'Connect With HTC',cText:'Follow HTC, explore the community, and join through our official channels.',
+ offSocial:'Official Social Media',visit:'Follow Us',
+ tiktokD:'Short videos and updates from HTC.',instagramD:'Photos, posts, and announcements from HTC.',channelD:'Official announcements through the WhatsApp Channel.',
+ joinTitle:'Join Our Community',joinD:'Join the conversation in this WhatsApp group.',join1:'Join HTC V1',join2:'Join HTC V2',
+ partTitle:'Partnership inquiries',partNone:'An official partnership contact will be posted here. For now, please reach HTC through the official social media above.',partHave:'For partnership inquiries, contact:',
+ footDesc:'A place for HTT fans to share memories, stories, have fun, and enjoy casual conversations together.',footNav:'Navigate',followUs:'Follow Us',rights:'All rights reserved.',
+ visitAcc:'Visit public account',back:'Back to Team',close:'Close'
+},
+id:{
+ logoAlt:'Logo Hokago Time Creator/Community',logoV2Alt:'Logo HTC gaya anime',menuOpen:'Buka menu',menuClose:'Tutup menu',langLabel:'Bahasa',
+ nHome:'Beranda',nAbout:'Tentang HTC',nTeam:'Tim Admin',nContact:'Kontak & Bergabung',joinHTC:'Gabung HTC',
+ joinGroup:'Gabung grup WhatsApp kami:',heroTitle:'Komunitas Sepulang Sekolahmu.',heroDesc:OFFICIAL_ID,explore:'Jelajahi HTC',joinUs:'Gabung Komunitas',
+ introTitle:'Rumah bagi penggemar HTT',introText:'HTC adalah tempat para penggemar berkumpul setelah bel berbunyi: bertukar kenangan dan cerita, mengobrol santai, dan menikmati HTT bersama.',
+ p1:'Kenangan & cerita',p2:'Obrolan santai',p3:'Fandom HTT',p4:'Interaksi komunitas',p5:'Kegiatan kreatif',
+ hlTitle:'Sorotan komunitas',
+ hl1t:'Anime & Fandom HTT',hl1d:'Rayakan serial favoritmu bersama sesama penggemar HTT.',
+ hl2t:'Pembuatan Konten',hl2d:'Bagikan karya dan ide kreatif dengan komunitas.',
+ hl3t:'Komunitas & Obrolan',hl3d:'Obrolan santai dan interaksi ramah kapan saja.',
+ pvTitle:'Kenali para admin',pvText:'Orang-orang yang menjaga HTC tetap berjalan.',viewTeam:'Lihat seluruh tim',viewProfile:'Lihat Profil',
+ socTitle:'Ikuti HTC',socText:'Temukan HTC di TikTok, Instagram, dan Saluran WhatsApp resmi.',
+ finalTitle:'Jadilah Bagian dari HTC.',finalText:'Terhubung dengan komunitas dan jadilah bagian dari pengalaman Hokago Time.',goContact:'Kontak & Bergabung dengan HTC',
+ aboutTitle:'Tentang Hokago Time Community',aboutIntro:OFFICIAL_ID,
+ storyTitle:'Cerita kami',storyText:'HTC adalah komunitas yang dibangun di sekitar fandom HTT. Anggota berbagi kenangan dan cerita, bersenang-senang, dan mengobrol santai bersama, dengan interaksi komunitas sebagai intinya.',quote:OFFICIAL_ID,
+ vmTitle:'Visi & misi',
+ vision:'Membangun komunitas yang ramah, kreatif, dan menarik, tempat anggota dapat berbagi minat, pengalaman, dan interaksi yang bermakna.',
+ mission1:'Mendorong percakapan yang ramah dan interaksi komunitas.',mission2:'Menyediakan ruang untuk berbagi cerita, minat, dan karya kreatif.',mission3:'Mendukung kegiatan komunitas yang menarik.',mission4:'Mendorong kolaborasi dan partisipasi yang positif.',
+ focusTitle:'Fokus kami',f1t:'Anime & Fandom HTT',f1d:'Ruang bersama bagi penggemar untuk menikmati HTT dan membicarakan hal yang mereka sukai.',f2t:'Pembuatan Konten',f2d:'Ruang untuk membuat dan membagikan karya kreatif bersama.',f3t:'Komunitas & Kolaborasi',f3d:'Bekerja sama dan saling mendukung.',
+ idTitle:'Identitas media sosial',idText:'HTC terhubung dengan audiensnya melalui TikTok, Instagram, dan Saluran WhatsApp resmi.',
+ teamTitle:'Tim Admin Kami',teamText:'Kenali tujuh admin yang membimbing dan menjaga HTC.',
+ cTitle:'Terhubung dengan HTC',cText:'Ikuti HTC, jelajahi komunitas, dan bergabung melalui kanal resmi kami.',
+ offSocial:'Media Sosial Resmi',visit:'Ikuti Kami',
+ tiktokD:'Video pendek dan kabar terbaru dari HTC.',instagramD:'Foto, postingan, dan pengumuman dari HTC.',channelD:'Pengumuman resmi melalui Saluran WhatsApp.',
+ joinTitle:'Gabung Komunitas',joinD:'Ikut mengobrol di grup WhatsApp ini.',join1:'Gabung HTC V1',join2:'Gabung HTC V2',
+ partTitle:'Kerja sama',partNone:'Kontak resmi untuk kerja sama akan dicantumkan di sini. Untuk saat ini, silakan hubungi HTC melalui media sosial resmi di atas.',partHave:'Untuk pertanyaan kerja sama, hubungi:',
+ footDesc:'Tempat bagi para penggemar HTT untuk berbagi kenangan, cerita, bersenang-senang, dan mengobrol santai bersama.',footNav:'Navigasi',followUs:'Ikuti Kami',rights:'Hak cipta dilindungi.',
+ visitAcc:'Kunjungi akun publik',back:'Kembali ke Tim',close:'Tutup'
+}};
+/* ---------- STATE / HELPERS ---------- */
+let lang='en';
+try{const s=localStorage.getItem('htc-lang');if(s==='en'||s==='id')lang=s}catch(e){}
+const t=k=>(translations[lang][k]??translations.en[k]??k);
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ext='target="_blank" rel="noopener noreferrer"';
+const initials=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('');
+
+function avatar(a,box){
+ box.textContent=initials(a.n);
+ loadAny(a.a,false).then(im=>{im.alt=a.n;box.textContent='';box.appendChild(im)}).catch(()=>{});
+}
+function featureCards(id,keys){
+ $(id).innerHTML=keys.map((k,i)=>`<article class="card rv" style="--d:${i*.1}s"><div class="ico">${ICON[k[0]]}</div><h3 data-i18n="${k[1]}t"></h3><p data-i18n="${k[1]}d"></p></article>`).join('');
+}
+function teamCards(id,list){
+ $(id).innerHTML=list.map((a,i)=>`<article class="mem rv" style="--d:${(i%4)*.08}s"><div class="av"></div><div class="bd"><h3>${esc(a.n)}</h3><div class="role">${esc(a.r)}</div><p data-desc="${ADMINS.indexOf(a)}"></p><button class="btn btn-d btn-sm" type="button" data-open="${ADMINS.indexOf(a)}" data-i18n="viewProfile"></button></div></article>`).join('');
+ $$(id+' .mem').forEach((c,i)=>avatar(list[i],$('.av',c)));
+}
+const SOC=[['tiktok','TikTok','tiktok','tiktokD'],['instagram','Instagram','instagram','instagramD'],['channel','WhatsApp Channel','whatsapp','channelD']];
+function socCards(id){
+ $(id).innerHTML=SOC.map((s,i)=>`<article class="card rv" style="--d:${i*.1}s"><div class="ico">${ICON[s[2]]}</div><h3>${s[1]}</h3><p data-i18n="${s[3]}"></p><a class="btn btn-p btn-sm" href="${LINKS[s[0]]}" ${ext}><span data-i18n="visit"></span></a></article>`).join('');
+}
+function build(){
+ featureCards('#hlCards',[['fan','hl1'],['create','hl2'],['chat','hl3']]);
+ featureCards('#focusCards',[['fan','f1'],['create','f2'],['chat','f3']]);
+ teamCards('#teamPreview',[ADMINS[0],ADMINS[1],ADMINS[2],ADMINS[6]]);
+ teamCards('#teamGrid',ADMINS);
+ socCards('#socPreview');socCards('#socGrid');
+ $('#joinGrid').innerHTML=[['v1','Hokago Time Creator V1','join1'],['v2','Hokago Time Creator V2','join2']].map((g,i)=>`<article class="card rv" style="--d:${i*.1}s"><div class="ico wa">${ICON.whatsapp}</div><h3>${g[1]}</h3><p data-i18n="joinD"></p><a class="btn btn-p btn-sm" href="${LINKS[g[0]]}" ${ext}><span data-i18n="${g[2]}"></span></a></article>`).join('');
+ $('#heroJoin').innerHTML='<small data-i18n="joinGroup"></small>'+[['v1','join1'],['v2','join2']].map(g=>`<a class="btn btn-wa" href="${LINKS[g[0]]}" ${ext}>${ICON.whatsapp.replace('class="f"','')}<span data-i18n="${g[1]}"></span></a>`).join('');
+ $('#idLinks').innerHTML=SOC.map(s=>`<a class="btn btn-d btn-sm" href="${LINKS[s[0]]}" ${ext}>${s[1]}</a>`).join('');
+ $('#footSoc').innerHTML=SOC.map(s=>`<a href="${LINKS[s[0]]}" ${ext}>${s[1]}</a>`).join('');
+}
+function applyLang(l,save){
+ lang=l;
+ document.documentElement.lang=l;
+ $$('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+ $$('[data-i18n-alt]').forEach(el=>el.alt=t(el.dataset.i18nAlt));
+ $$('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
+ $$('[data-desc]').forEach(el=>el.textContent=ADMINS[el.dataset.desc].d[l]);
+ $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+ $('#burger').setAttribute('aria-label',t($('#burger').getAttribute('aria-expanded')==='true'?'menuClose':'menuOpen'));
+ const p=$('#partner');
+ if(PARTNER_CONTACT){const isUrl=/^https?:/.test(PARTNER_CONTACT);const href=isUrl?PARTNER_CONTACT:'mailto:'+PARTNER_CONTACT;p.innerHTML=esc(t('partHave'))+' <a style="color:var(--cyan);font-weight:700" href="'+esc(href)+'">'+esc(PARTNER_CONTACT)+'</a>'}
+ else p.textContent=t('partNone');
+ if(openIdx>=0)fillModal(openIdx);
+ document.title=l==='id'?'HTC – Hokago Time Creator/Community (Komunitas)':'HTC – Hokago Time Creator/Community';
+ if(save){try{localStorage.setItem('htc-lang',l)}catch(e){}}
+}
+/* ---------- MODAL ---------- */
+let openIdx=-1,lastFocus=null;
+const modal=$('#modal'),dlg=$('.dlg',modal);
+function fillModal(i){
+ const a=ADMINS[i];
+ $('#mName').textContent=a.n;$('#mRole').textContent=a.r;$('#mDesc').textContent=a.d[lang];$('#mLink').href=a.u;
+ avatar(a,$('#mAv'));
+}
+function openModal(i,from){
+ openIdx=i;lastFocus=from;fillModal(i);
+ modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+ document.body.classList.add('lock');
+ setTimeout(()=>$('#mClose').focus(),50);
+}
+function closeModal(){
+ if(openIdx<0)return;
+ openIdx=-1;modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
+ document.body.classList.remove('lock');
+ if(lastFocus)lastFocus.focus();
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-open]');
+ if(b)openModal(+b.dataset.open,b);
+});
+$('#mClose').onclick=closeModal;
+$('#mBack').onclick=()=>{closeModal();location.hash='#team'};
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){closeModal();closeMenu()}
+ if(e.key==='Tab'&&openIdx>=0){
+  const f=$$('button,a[href]',dlg).filter(x=>x.offsetParent!==null);
+  if(!f.length)return;
+  const first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ }
+});
+/* ---------- NAV ---------- */
+const nav=$('#nav'),menu=$('#menu'),burger=$('#burger');
+function closeMenu(){
+ menu.classList.remove('open');nav.classList.remove('open');burger.setAttribute('aria-expanded','false');
+ burger.setAttribute('aria-label',t('menuOpen'));
+ if(openIdx<0)document.body.classList.remove('lock');
+}
+burger.onclick=()=>{
+ const o=burger.getAttribute('aria-expanded')!=='true';
+ burger.setAttribute('aria-expanded',o);menu.classList.toggle('open',o);nav.classList.toggle('open',o);
+ burger.setAttribute('aria-label',t(o?'menuClose':'menuOpen'));
+ document.body.classList.toggle('lock',o);
+};
+$$('.menu a').forEach(a=>a.addEventListener('click',closeMenu));
+$$('.lang button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang,true));
+window.addEventListener('resize',()=>{if(innerWidth>1080)closeMenu()});
+function onScroll(){nav.classList.toggle('solid',scrollY>40)}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ---------- SCROLL SPY + REVEAL ---------- */
+const IDS=['home','about','team','contact'];
+function setActive(id){$$('.menu a.lnk').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id))}
+function observe(){
+ if(!('IntersectionObserver' in window)){$$('.rv').forEach(e=>e.classList.add('in'));return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+ $$('.rv').forEach(e=>io.observe(e));
+ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setActive(e.target.id);const h='#'+e.target.id;if(location.hash!==h&&(location.hash||e.target.id!=='home')&&openIdx<0)history.replaceState(null,'',h)}}),{rootMargin:'-45% 0px -50% 0px'});
+ IDS.forEach(i=>spy.observe(document.getElementById(i)));
+}
+addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(IDS.includes(id))setActive(id)});
+
+/* ---------- IMAGE LOADER (tries several file extensions; strips white logo backgrounds) ---------- */
+const EXTS=['','.png','.webp','.jpg','.jpeg','.gif'];
+function loadImg(url,cors){return new Promise((ok,no)=>{const i=new Image();i.referrerPolicy='no-referrer';if(cors)i.crossOrigin='anonymous';i.onload=()=>ok(i);i.onerror=no;i.src=url})}
+async function loadAny(base,cors){for(const x of EXTS){try{return await loadImg(base+x,cors)}catch(e){}}throw new Error('x')}
+function cutWhite(img){
+ const sc=Math.min(1,900/img.naturalWidth),w=Math.round(img.naturalWidth*sc),h=Math.round(img.naturalHeight*sc);
+ const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.drawImage(img,0,0,w,h);
+ const d=x.getImageData(0,0,w,h),p=d.data,seen=new Uint8Array(w*h),st=[];
+ const near=i=>p[i*4+3]>0&&p[i*4]>232&&p[i*4+1]>232&&p[i*4+2]>232;
+ const push=i=>{if(!seen[i]&&near(i)){seen[i]=1;st.push(i)}};
+ for(let a=0;a<w;a++){push(a);push((h-1)*w+a)}for(let b=0;b<h;b++){push(b*w);push(b*w+w-1)}
+ if(!st.length)return null;
+ while(st.length){const i=st.pop(),px=i%w,py=(i/w)|0;p[i*4+3]=0;
+  if(px>0)push(i-1);if(px<w-1)push(i+1);if(py>0)push(i-w);if(py<h-1)push(i+w)}
+ x.putImageData(d,0,0);return c.toDataURL('image/png');
+}
+async function initImages(){
+ await Promise.all($$('img[data-src]').map(async el=>{
+  const base=el.dataset.src,logo=el.dataset.kind==='logo';
+  try{
+   let im=null,url=null;
+   if(logo){try{im=await loadAny(base,true);url=cutWhite(im)||im.src}catch(e){im=null}}
+   if(url){el.src=url}
+   else{im=im||await loadAny(base,false);el.src=im.src;if(logo)el.classList.add('badge')}
+   el.classList.add('ok');
+  }catch(e){
+   if(el.closest('.hero-bg'))el.remove();
+   else if(el.classList.contains('hero-logo')){el.style.display='none';const f=el.nextElementSibling;if(f)f.style.display='block'}
+   else if(el.classList.contains('nav-logo')){el.replaceWith(Object.assign(document.createElement('b'),{textContent:'HTC'}))}
+   else el.style.display='none';
+  }
+ }));
+}
+/* ---------- INIT ---------- */
+$('#yr').textContent=new Date().getFullYear();
+build();initImages();applyLang(lang,false);observe();setActive(IDS.includes(location.hash.slice(1))?location.hash.slice(1):'home');
+setTimeout(()=>$$('.rv').forEach(e=>{if(!e.classList.contains('in')&&e.getBoundingClientRect().top<innerHeight)e.classList.add('in')}),300);
+</script>
+</body>
+</html>
